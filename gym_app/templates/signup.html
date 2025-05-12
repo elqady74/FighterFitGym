@@ -1,0 +1,293 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fighter Fit Gym - Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 200vh;
+      background-image: url("{% static 'photo_2025-05-03_23-20-09.jpg' %}");
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .backdrop-blur {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-between min-h-screen">
+  <div class="flex-1 flex flex-col items-center justify-center w-full">
+    <div class="text-center absolute top-10 fade-in-up">
+      <img src="{% static 'photo_2025-05-03_23-20-09.jpg' %}" alt="Fighter Fit Gym Logo" class="w-28 h-28 mx-auto rounded-full border-4 border-yellow-400 shadow-xl object-cover">
+      <h1 class="text-4xl font-extrabold text-yellow-400 mt-2 drop-shadow-lg">Fighter Fit Gym</h1>
+    </div>
+
+    <div class="backdrop-blur p-8 rounded-2xl shadow-2xl w-full max-w-md border border-white/30 mt-40 fade-in-up">
+      <h2 class="text-2xl font-bold text-center text-white mb-6">Create Your Account</h2>
+      <div id="signupForm" class="space-y-6">
+        <div>
+          <label for="fname" class="block text-sm font-medium text-white">First Name</label>
+          <input type="text" id="fname" name="fname" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+          <p id="fname-error" class="text-red-500 text-sm mt-1 hidden">First name cannot be empty.</p>
+        </div>
+        <div>
+          <label for="lname" class="block text-sm font-medium text-white">Last Name</label>
+          <input type="text" id="lname" name="lname" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+          <p id="lname-error" class="text-red-500 text-sm mt-1 hidden">Last name cannot be empty.</p>
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-white">Email</label>
+          <input type="email" id="email" name="email" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+          <p id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email address.</p>
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-white">Password</label>
+          <input type="password" id="password" name="password" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+          <p id="password-error" class="text-red-500 text-sm mt-1 hidden">Password cannot be empty.</p>
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-medium text-white">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+          <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid phone number.</p>
+        </div>
+        <div>
+          <label for="role" class="block text-sm font-medium text-white">I am a:</label>
+          <select id="role" name="role" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="trainee">Trainee</option>
+            <option value="trainer">Trainer</option>
+          </select>
+        </div>
+        <!-- Trainee-specific fields -->
+        <div id="trainee-fields" class="space-y-4 hidden">
+          <div>
+            <label for="height" class="block text-sm font-medium text-white">Height (cm)</label>
+            <input type="number" id="height" name="height" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90">
+            <p id="height-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid height.</p>
+          </div>
+          <div>
+            <label for="weight" class="block text-sm font-medium text-white">Weight (kg)</label>
+            <input type="number" id="weight" name="weight" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90">
+            <p id="weight-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid weight.</p>
+          </div>
+        </div>
+        <!-- Trainer-specific fields -->
+        <div id="trainer-fields" class="space-y-4 hidden">
+          <div>
+            <label for="specialization" class="block text-sm font-medium text-white">Specialization</label>
+            <input type="text" id="specialization" name="specialization" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90">
+          </div>
+          <div>
+            <label for="certification" class="block text-sm font-medium text-white">Certification</label>
+            <input type="text" id="certification" name="certification" class="mt-1 w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white/90">
+          </div>
+        </div>
+        <button type="button" onclick="handleSignup()" class="w-full bg-yellow-500 text-black font-bold py-3 rounded-md hover:bg-yellow-600 transition duration-300">Sign Up</button>
+      </div>
+      <p class="text-center te<p class="text-center text-white mt-4">Already have an account? <a href="{% url 'index' %}" class="text-yellow-300 hover:underline">Login</a></p>
+    </div>
+  </div>
+
+  <footer class="w-full text-center text-white py-8 backdrop-blur bg-black/50 border-t border-white/20">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-yellow-400 font-bold text-lg mb-4">Contact Us</h3>
+          <p class="flex items-center justify-center md:justify-start hover:text-yellow-300 transition-colors">
+            <i class="fas fa-envelope text-yellow-400 mr-3"></i>
+            <a href="mailto:fighterfitgym@gmail.com">fighterfitgym@gmail.com</a>
+          </p>
+          <p class="flex items-center justify-center md:justify-start hover:text-yellow-300 transition-colors">
+            <i class="fas fa-phone-alt text-yellow-400 mr-3"></i>
+            <a href="tel:+201234567890">+20 1015730065</a>
+          </p>
+          <p class="flex items-center justify-center md:justify-start hover:text-yellow-300 transition-colors">
+            <i class="fab fa-whatsapp text-yellow-400 mr-3"></i>
+            <a href="https://wa.me/201015730065" target="_blank">WhatsApp Chat</a>
+          </p>
+        </div>
+        <div class="space-y-3">
+          <h3 class="text-yellow-400 font-bold text-lg mb-4">Quick Links</h3>
+          <p><a href="#" class="hover:text-yellow-300 transition-colors">About Us</a></p>
+          <p><a href="#" class="hover:text-yellow-300 transition-colors">Our Services</a></p>
+          <p><a href="#" class="hover:text-yellow-300 transition-colors">Membership</a></p>
+          <p><a href="#" class="hover:text-yellow-300 transition-colors">Schedule</a></p>
+        </div>
+        <div class="space-y-3">
+          <h3 class="text-yellow-400 font-bold text-lg mb-4">Follow Us</h3>
+          <div class="flex justify-center md:justify-start space-x-4">
+            <a href="#" class="text-2xl text-yellow-400 hover:text-yellow-300 transition-colors">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" class="text-2xl text-yellow-400 hover:text-yellow-300 transition-colors">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-2xl text-yellow-400 hover:text-yellow-300 transition-colors">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-2xl text-yellow-400 hover:text-yellow-300 transition-colors">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-4 border-t border-white/10">
+        <p class="text-sm">© 2025 Fighter Fit Gym. All rights reserved.</p>
+        <div class="mt-2 space-x-4 text-sm">
+          <a href="#" class="text-yellow-400 hover:text-yellow-300 transition-colors">Privacy Policy</a>
+          <span class="text-white/30">|</span>
+          <a href="#" class="text-yellow-400 hover:text-yellow-300 transition-colors">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Show/hide fields based on role selection
+    document.getElementById('role').addEventListener('change', function() {
+      const role = this.value;
+      document.getElementById('trainee-fields').classList.add('hidden');
+      document.getElementById('trainer-fields').classList.add('hidden');
+      if (role === 'trainee') {
+        document.getElementById('trainee-fields').classList.remove('hidden');
+      } else if (role === 'trainer') {
+        document.getElementById('trainer-fields').classList.remove('hidden');
+      }
+    });
+
+    // Handle signup form submission
+    async function handleSignup() {
+      const fname = document.getElementById('fname').value.trim();
+      const lname = document.getElementById('lname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const role = document.getElementById('role').value;
+      const height = document.getElementById('height').value.trim();
+      const weight = document.getElementById('weight').value.trim();
+      const specialization = document.getElementById('specialization').value.trim();
+      const certification = document.getElementById('certification').value.trim();
+
+      // Reset error messages
+      document.getElementById('fname-error').classList.add('hidden');
+      document.getElementById('lname-error').classList.add('hidden');
+      document.getElementById('email-error').classList.add('hidden');
+      document.getElementById('password-error').classList.add('hidden');
+      document.getElementById('phone-error').classList.add('hidden');
+      document.getElementById('height-error').classList.add('hidden');
+      document.getElementById('weight-error').classList.add('hidden');
+
+      let isValid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\+?\d{10,15}$/;
+
+      if (fname === '') {
+        document.getElementById('fname-error').classList.remove('hidden');
+        isValid = false;
+      }
+      if (lname === '') {
+        document.getElementById('lname-error').classList.remove('hidden');
+        isValid = false;
+      }
+      if (!emailRegex.test(email)) {
+        document.getElementById('email-error').classList.remove('hidden');
+        isValid = false;
+      }
+      if (password === '') {
+        document.getElementById('password-error').classList.remove('hidden');
+        isValid = false;
+      }
+      if (!phoneRegex.test(phone)) {
+        document.getElementById('phone-error').classList.remove('hidden');
+        isValid = false;
+      }
+      if (role === 'trainee') {
+        if (height && (isNaN(height) || height <= 0)) {
+          document.getElementById('height-error').classList.remove('hidden');
+          isValid = false;
+        }
+        if (weight && (isNaN(weight) || weight <= 0)) {
+          document.getElementById('weight-error').classList.remove('hidden');
+          isValid = false;
+        }
+      }
+
+      if (isValid) {
+        const userData = {
+          fname,
+          lname,
+          email,
+          password,
+          phone,
+          role,
+          height: role === 'trainee' ? height : null,
+          weight: role === 'trainee' ? weight : null,
+          specialization: role === 'trainer' ? specialization : null,
+          certification: role === 'trainer' ? certification : null,
+        };
+
+        try {
+          const response = await fetch('http://localhost:8000/api/signup/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
+
+          if (response.ok) {
+            alert('Signup successful! Please log in.');
+            window.location.href = 'index.html';
+          } else {
+            const error = await response.json();
+            alert('Signup failed: ' + error.message);
+          }
+        } catch (error) {
+          alert('Error connecting to the server: ' + error.message);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
