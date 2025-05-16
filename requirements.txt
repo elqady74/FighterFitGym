@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 Django==4.2.7
 djangorestframework==3.14.0
 django-cors-headers==4.3.0
 Pillow==10.0.0
 mysqlclient==2.2.4
 
+=======
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.0
+Pillow==10.0.0
+mysqlclient==2.2.4
+
+>>>>>>> b60a3d5ebed84a802da2556ecaa12a22dfff3aea
 عرض في الشريط الجانبي
